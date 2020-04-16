@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList,StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 
 import EventCard from "./EventCard";
 
@@ -9,6 +9,15 @@ class EventList extends Component {
   };
 
   componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        events: this.state.events.map((evt) => ({
+          ...evt,
+          timer: Date.now(),
+        })),
+      });
+    }, 1000);
+
     const events = require("./db.json").events.map((e) => ({
       ...e,
       date: new Date(e.date),
@@ -18,7 +27,8 @@ class EventList extends Component {
 
   render() {
     return (
-      <FlatList style={styles.list}
+      <FlatList
+        style={styles.list}
         data={this.state.events}
         renderItem={({ item }) => <EventCard event={item} />}
         keyExtractor={(item) => item.id.toString()}
@@ -28,11 +38,11 @@ class EventList extends Component {
 }
 
 const styles = StyleSheet.create({
-    list:{
-        flex:1,
-        paddingTop:50,
-        backgroundColor:"#F3F3F3"
-    }
-})
+  list: {
+    flex: 1,
+    paddingTop: 50,
+    backgroundColor: "#F3F3F3",
+  },
+});
 
 export default EventList;

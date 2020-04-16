@@ -19,6 +19,6 @@ export function getCountDownParts(eventDate) {
     days: parseInt(duration.as("days")),
     hours: duration.get("hours"),
     minutes: duration.get("minutes"),
-    seconds: duration.get("minutes"),
+    seconds: duration.get("seconds"),
   };
 }
