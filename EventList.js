@@ -1,0 +1,38 @@
+import React, { Component } from "react";
+import { FlatList,StyleSheet } from "react-native";
+
+import EventCard from "./EventCard";
+
+class EventList extends Component {
+  state = {
+    events: [],
+  };
+
+  componentDidMount() {
+    const events = require("./db.json").events.map((e) => ({
+      ...e,
+      date: new Date(e.date),
+    }));
+    this.setState({ events });
+  }
+
+  render() {
+    return (
+      <FlatList style={styles.list}
+        data={this.state.events}
+        renderItem={({ item }) => <EventCard event={item} />}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+    list:{
+        flex:1,
+        paddingTop:50,
+        backgroundColor:"#F3F3F3"
+    }
+})
+
+export default EventList;
