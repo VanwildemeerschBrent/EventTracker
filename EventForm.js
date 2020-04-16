@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { View, Text, TouchableHighlight } from "react-native";
+import { View, Text, TouchableHighlight,StyleSheet } from "react-native";
 
 class EventForm extends Component {
-  handleAddPress = () => {};
+  handleAddPress = () => {
+    this.props.navigation.navigate('List')
+  };
+
+  
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <TouchableHighlight onPress={this.handleAddPress}>
           <Text>Add</Text>
         </TouchableHighlight>
@@ -13,5 +17,11 @@ class EventForm extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    paddingTop:20,
+  }
+})
 
 export default EventForm;
